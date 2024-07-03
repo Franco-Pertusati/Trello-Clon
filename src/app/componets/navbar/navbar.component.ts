@@ -6,7 +6,11 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [BtnComponent, OverlayModule, CommonModule ],
+  imports: [
+    BtnComponent,
+    OverlayModule,
+    CommonModule,
+  ],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
