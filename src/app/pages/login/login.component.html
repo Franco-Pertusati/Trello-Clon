@@ -1,0 +1,29 @@
+<div class="w-screen h-screen md:bg-gray-100 relative sm:bg-white">
+    <div class="absolute w-full h-full">
+        <img class="absolute w-96 left-0 bottom-0 hidden md:block" src="/assets/svg/login-bg-left.svg" alt="bg left">
+        <img class="absolute w-96 right-0 bottom-0 hidden md:block" src="/assets/svg/login-bg-rigth.svg" alt="bg left">
+        <div class="relative m-auto sm:w-screen md:w-96">
+            <header class="pt-6 pb-2 flex justify-center">
+                <img class="w-56" src="/assets/images/logo/logo-gradient-blue-trello.png" alt="logo">
+            </header>
+            <div class="mx-auto bg-white rounded md:shadow py-4 px-6 sm:h-full sm:shadow-none">
+                <div class="mb-4">
+                    <h1 class="text-center font-semibold pt-4 pb-8">Log in to continue</h1>
+                    <form novalidate class="space-y-4">
+                        <input placeholder="Enter email" type="email" class="w-full rounded border-2 border-gray-200">
+                        <input placeholder="Enter pasword" type="password"
+                            class="w-full rounded border-2 border-gray-200">
+                        <app-btn [typeBtn]="'submit'" [color]="'primary'">Log In</app-btn>
+                    </form>
+                    <p class="text-blue-600 text-center py-4">Can't log in? • Create an account</p>
+                    <div class="py-4">
+                        <hr>
+                    </div>
+                    <img class="mx-auto w-64 py-4" src="/assets/images/logo/logo-atlassian-gray.png" alt="logo">
+                    <p class="text-center py-2 text-blue-600">One account for Trello, Jira, Confluence and more.</p>
+                    <p class="text-center py-2 text-blue-600">Privacy policy • User Notice</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

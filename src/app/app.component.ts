@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+// const wasd = require ("../assets/wasd.jpg")
 
 @Component({
   selector: 'app-root',
