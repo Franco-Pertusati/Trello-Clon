@@ -3,10 +3,14 @@ import {
   CdkDragDrop,
   DragDropModule,
   moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
-import { ToDo } from '../../models/todo.model';
+import { ToDo, Column } from '../../models/todo.model';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board',
@@ -28,32 +32,101 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   ],
 })
 export class BoardComponent {
-  todos: ToDo[] = [
+  constructor (
+    private dialog: Dialog
+  ) {}
+
+  columns: Column[] = [
     {
-      id: '1',
-      title: 'Task 1',
+      title: 'ToDo',
+      todos: [
+        {
+          id: '1',
+          title: 'Task 1',
+        },
+        {
+          id: '2',
+          title: 'Task 2',
+        },
+        {
+          id: '3',
+          title: 'Task 3',
+        },
+      ],
     },
     {
-      id: '3',
-      title: 'Task 3',
+      title: 'Doing',
+      todos: [
+        {
+          id: '4',
+          title: 'Task 4',
+        },
+      ],
     },
     {
-      id: '4',
-      title: 'Task 4',
+      title: 'Done',
+      todos: [
+        {
+          id: '7',
+          title: 'Task 7',
+        },
+      ],
     },
   ];
 
-  // doing: ToDO[] = [
-  //   {
-  //     id: '2',
-  //     title: 'Task 2',
-  //   },
-  // ];
+  todos: ToDo[] = [];
 
-  // done: ToDO[] = [];
+  drop(event: CdkDragDrop<ToDo[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
 
+  addColumn() {
+    this.columns.push({
+      title: '',
+      todos: [],
+      namingColumnMode: true,
+    });
+  }
 
-  drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+  applyColumnName(i: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.columns[i].title = input.value;
+    this.columns[i].namingColumnMode = false;
+    this.addColumn();
+  }
+
+  addTodo() {
+    this.todos.push({
+      title: '',
+      id: 'x',
+      namingTodoMode: true,
+    });
+  }
+
+  applyTodoName(i: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.todos[i].title = input.value;
+    this.todos[i].namingTodoMode = false;
+    this.addTodo();
+  }
+
+  openDialog() {
+    this.dialog.open(TodoDialogComponent, {
+      width: '768px'
+    })
+
   }
 }

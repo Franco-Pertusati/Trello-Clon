@@ -1,1 +1,71 @@
-<p>todo-dialog works!</p>
+<div class="flex justify-center">
+    <div class="bg-seasalt p-4 rounded-xl flex w-full">
+        <div class=" w-full">
+            <h2 class="text-2xl font-bold">Task 1</h2>
+            <p class="mb-4">From ToDo List</p>
+        </div>
+        <div class="min-w-52">
+            <div class="h-36 flex flex-row-reverse">
+                <button (click)="close()" class="relative h-10 w-10 rounded-full p-0 hover:bg-anti-flash_white">
+                    <i class="bi bi-x-lg text-xl m-0"></i>
+                </button>
+            </div>
+            <div class="mb-6">
+                <h2 class="font-semibold text-fontent mb-2">Add to card</h2>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-people"></i>
+                    Members
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-tag"></i>
+                    Labels
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-check2-square"></i>
+                    Checklist
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-clock"></i>
+                    Dates
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-paperclip"></i>
+                    Attachment
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-card-image"></i>
+                    Cover
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-input-cursor"></i>
+                    Custom Fields
+                </button>
+            </div>
+            <div>
+                <h2 class="mb-2 font-semibold text-fontent">Actions</h2>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-arrow-right"></i>
+                    Move
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-copy"></i>
+                    Copy
+                </button>
+                <button
+                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                    <i class="bi bi-card-heading"></i>
+                    Make template
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
