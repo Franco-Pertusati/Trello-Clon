@@ -1,47 +1,42 @@
 import { Component } from '@angular/core';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { BoardService } from '../../services/boards.service';
+import { Board } from '../../models/todo.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [NavbarComponent, CdkAccordionModule],
+  imports: [NavbarComponent],
   templateUrl: './boards.component.html',
 })
 export class BoardsComponent {
-  items = [
-    {
-      label: 'Item 1',
-      items: [
-        {
-          label: 'Sub Item 1.1',
-        },
-        {
-          label: 'Sub Item 1.2',
-        },
-      ],
-    },
-    {
-      label: 'Item 2',
-      items: [
-        {
-          label: 'Sub Item 2.1',
-        },
-      ],
-    },
-    {
-      label: 'Item 3',
-      items: [
-        {
-          label: 'Sub Item 3.1',
-        },
-        {
-          label: 'Sub Item 3.2',
-        },
-        {
-          label: 'Sub Item 4.2',
-        },
-      ],
-    },
-  ];
+  boards: Board[] = [];
+  isBoardBeingCreate: boolean = false;
+
+  constructor(private boardService: BoardService, private router: Router) {}
+
+  ngOnInit() {
+    this.boards = this.boardService.getBoards();
+  }
+
+  navigateToBoard(id: number): void {
+    this.router.navigate(['/boards', id]);
+  }
+
+  setSelectedBoard(id: number) {
+    this.boardService.setSelectedBoard(id);
+  }
+
+  createBorad(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    const board: Board = {
+      id: this.boards.length + 1,
+      name: input.value,
+      columns: [],
+    };
+    this.boardService.addBoard(board);
+    input.value = '';
+  }
 }

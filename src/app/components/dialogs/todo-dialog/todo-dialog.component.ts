@@ -1,6 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { BtnComponent } from '../btn/btn.component';
+import { BtnComponent } from '../../btn/btn.component';
 
 @Component({
   selector: 'app-todo-dialog',

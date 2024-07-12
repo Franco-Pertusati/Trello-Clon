@@ -1,47 +1,26 @@
-<div class="flex flex-col h-screen">
-    <app-navbar></app-navbar>
-    <div class="h-full bg-blue-600 px-4 pb-4">
-        <div class="flex flex-col h-full">
-            <div>
-                <h2 class="text-xl font-bold text-seasalt my-4">Demo Board</h2>
-            </div>
-            <div class="flex grow items-start w-full h-full overflow-x-scroll" cdkDropListGroup>
-                @for (column of columns; track column; let i = $index) {
-                <div class="rounded-xl bg-anti-flash_white min-w-72 h-fit p-2 mr-3">
-                    <div class="flex justify-between py-1">
-                        <h3 class="font-bold ml-2 text-onyx">{{ column.title }}</h3>
-                    </div>
-                    @if (column.namingColumnMode) {
-                    <input type="text" placeholder="Enter list name..." (keydown.enter)="applyColumnName(i, $event)"
-                        class="rounded-xl relative -top-1 p-1 w-full">
-                    }
-                    <div class="text-sm mt-2 min-h-3" cdkDropList (cdkDropListDropped)="drop($event)"
-                        [cdkDropListData]="column.todos">
-                        @for (todo of column.todos; track todo; let i = $index) {
-                        <div (click)="openDialog()" 
-                        cdkDrag
-                            class="bg-seasalt shadow p-2 text-fontent rounded-xl mt-2 cursor-pointer hover:outline hover:outline-2 hover:outline-blue-600 overflow-hidden">
-                            {{ todo.title }}
-                        </div>
-                        }
-                    </div>
-                    @if (!column.namingColumnMode) {
-                    <button (click)="addTodo()"
-                        class="p-2 w-full text-start rounded-xl mt-2 text-slate_gray font-semibold hover:bg-anti-flash_white">+
-                        Add a card</button>
-                    } @else {
-                    <button
-                        class="py-2 mr-6 px-4 w-fit text-center bg-blue-600 rounded-xl text-seasalt font-semibold hover:bg-blue-700">
-                        Add list</button>
-                    <button>
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                    }
-                </div>
-                }
-                <button class="min-w-72 text-seasalt bg-blue-500 rounded-xl p-2 font-semibold" (click)="addColumn()">Add another
-                    list</button>
-            </div>
+<div class="py-8 px-4 flex gap-4 bg-main2 w-full h-full">
+    @for (column of selectedBoard?.columns; track column; let i = $index;) {
+    <div class="min-w-72 h-fit p-2 bg-platinum rounded-xl shadow-md">
+        <span class="font-semibold pl-2">{{ column.title }}</span>
+        <div class="my-6">
+            <!-- Lista de todos -->
         </div>
+        <button class="p-2 w-full flex gap-2 text-start rounded-lg hover:bg-seasalt">
+            <i class="bi bi-plus-lg"></i>
+            <span>Add a card</span>
+        </button>
     </div>
+    }
+    @if (!isCreatingColumn) {
+    <button (click)="isCreatingColumn = !isCreatingColumn"
+        class="p-2 w-72 h-fit bg-platinum hover:bg-seasalt flex gap-2 text-start rounded-xl font-semibold shadow-md">
+        <i class="bi bi-plus-lg"></i>
+        <span>Add another column</span>
+    </button>
+    } @else {
+    <div class="p-2 w-72 h-fit bg-platinum hover:bg-seasalt flex flex-col gap-2 text-start rounded-xl font-semibold shadow-md">
+        <input type="text" class="rounded-md bg-seasalt" (keydown.enter)="addColumn($event)">
+        <button class="p-2 px-4 rounded-md bg-main text-seasalt w-fit">Create</button>
+    </div>
+    }
 </div>

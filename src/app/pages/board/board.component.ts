@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -7,10 +7,10 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
-import { ToDo, Column } from '../../models/todo.model';
+import { ToDo, Column, Board } from '../../models/todo.model';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component';
-import { Title } from '@angular/platform-browser';
+import { TodoDialogComponent } from '../../components/dialogs/todo-dialog/todo-dialog.component';
+import { BoardService } from '../../services/boards.service';
 
 @Component({
   selector: 'app-board',
@@ -32,101 +32,23 @@ import { Title } from '@angular/platform-browser';
   ],
 })
 export class BoardComponent {
-  constructor (
-    private dialog: Dialog
-  ) {}
+  selectedBoard?: Board;
+  isCreatingColumn: boolean = false;
 
-  columns: Column[] = [
-    {
-      title: 'ToDo',
-      todos: [
-        {
-          id: '1',
-          title: 'Task 1',
-        },
-        {
-          id: '2',
-          title: 'Task 2',
-        },
-        {
-          id: '3',
-          title: 'Task 3',
-        },
-      ],
-    },
-    {
-      title: 'Doing',
-      todos: [
-        {
-          id: '4',
-          title: 'Task 4',
-        },
-      ],
-    },
-    {
-      title: 'Done',
-      todos: [
-        {
-          id: '7',
-          title: 'Task 7',
-        },
-      ],
-    },
-  ];
+  constructor(private service: BoardService) {}
 
-  todos: ToDo[] = [];
-
-  drop(event: CdkDragDrop<ToDo[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+  ngOnInit() {
+    this.selectedBoard = this.service.getSelectedBoard();
   }
 
-  addColumn() {
-    this.columns.push({
-      title: '',
+  addColumn(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    const newColumn: Column = {
+      title: input.value,
       todos: [],
-      namingColumnMode: true,
-    });
-  }
-
-  applyColumnName(i: number, event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.columns[i].title = input.value;
-    this.columns[i].namingColumnMode = false;
-    this.addColumn();
-  }
-
-  addTodo() {
-    this.todos.push({
-      title: '',
-      id: 'x',
-      namingTodoMode: true,
-    });
-  }
-
-  applyTodoName(i: number, event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.todos[i].title = input.value;
-    this.todos[i].namingTodoMode = false;
-    this.addTodo();
-  }
-
-  openDialog() {
-    this.dialog.open(TodoDialogComponent, {
-      width: '768px'
-    })
-
+    };
+    input.value = '';
+    this.selectedBoard?.columns.push(newColumn);
   }
 }
