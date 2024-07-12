@@ -1,0 +1,24 @@
+<div class="min-w-72 w-72 h-fit p-2 bg-platinum rounded-xl shadow-md">
+    <span class="font-semibold pl-2">{{ column.title }}</span>
+    <div class="my-4 flex flex-col gap-2">
+        <!-- Lista de todos -->
+        @for (todo of column.todos; track todo; let i = $index;) {
+        <app-todo [todo]="todo" />
+        }
+    </div>
+    @if (isCreatingCard) {
+    <div class="w-full h-fit bg-platinum flex flex-col gap-2 text-start rounded-xl font-semibold">
+        <input type="text" (keydown.enter)="addTodo($event)" placeholder="Card name"
+            class="bg-seasalt w-full font-normal rounded-xl">
+        <div class="flex gap-4">
+            <button class="p-2 px-4 rounded-md bg-main text-seasalt w-fit">Create</button>
+            <button (click)="isCreatingCard = false;"><i class="bi bi-x-lg"></i></button>
+        </div>
+    </div>
+    } @else {
+    <button (click)="isCreatingCard = true" class="p-2 w-full flex gap-2 text-start rounded-lg hover:bg-seasalt">
+        <i class="bi bi-plus-lg"></i>
+        <span>Add a card</span>
+    </button>
+    }
+</div>

@@ -22,7 +22,10 @@
             } @else {
                 <div class="flex flex-col gap-2 w-64 h-36 bg-platinum rounded-lg p-2 font-semibold cursor-pointer shadow-md">
                     <input (keydown.enter)="createBorad($event); isBoardBeingCreate = false;" type="text" class="rounded-md bg-seasalt">
-                    <button class="p-2 px-4 rounded-md bg-main text-seasalt w-fit">Create</button>
+                    <div class="flex gap-4">
+                        <button class="p-2 px-4 rounded-md bg-main text-seasalt w-fit">Create</button>
+                        <button (click)="isBoardBeingCreate = false;"><i class="bi bi-x-lg"></i></button>
+                    </div>
                 </div>
             }
         </div>

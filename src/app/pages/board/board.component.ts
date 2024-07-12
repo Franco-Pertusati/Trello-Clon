@@ -1,38 +1,20 @@
-import { Component, input } from '@angular/core';
-import {
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToDo, Column, Board } from '../../models/todo.model';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { TodoDialogComponent } from '../../components/dialogs/todo-dialog/todo-dialog.component';
 import { BoardService } from '../../services/boards.service';
+import { ColumnComponent } from '../../components/column/column.component';
+import { TodoComponent } from '../../components/todo/todo.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [DragDropModule, CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, TodoComponent, ColumnComponent],
   templateUrl: './board.component.html',
-  styles: [
-    `
-      /* Animate items as they're being sorted. */
-      .cdk-drop-list-dragging .cdk-drag {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-      }
-
-      /* Animate an item that has been dropped. */
-      .cdk-drag-animating {
-        transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
-      }
-    `,
-  ],
+  styleUrl: './board.component.scss',
 })
 export class BoardComponent {
-  selectedBoard?: Board;
+  selectedBoard: Board = { id: 0, name: 'Undefined', columns: [] };
   isCreatingColumn: boolean = false;
 
   constructor(private service: BoardService) {}
@@ -44,11 +26,16 @@ export class BoardComponent {
   addColumn(event: Event) {
     const input = event.target as HTMLInputElement;
 
-    const newColumn: Column = {
-      title: input.value,
-      todos: [],
-    };
-    input.value = '';
-    this.selectedBoard?.columns.push(newColumn);
+    if (input.value == '') {
+      this.isCreatingColumn = false;
+    } else {
+      const newColumn: Column = {
+        id: this.selectedBoard?.columns.length,
+        title: input.value,
+        todos: [],
+      };
+      this.selectedBoard?.columns.push(newColumn);
+      input.value = '';
+    }
   }
 }

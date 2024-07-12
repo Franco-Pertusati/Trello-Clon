@@ -31,12 +31,16 @@ export class BoardsComponent {
   createBorad(event: Event) {
     const input = event.target as HTMLInputElement;
 
-    const board: Board = {
-      id: this.boards.length + 1,
-      name: input.value,
-      columns: [],
-    };
-    this.boardService.addBoard(board);
-    input.value = '';
+    if (input.value != '') {
+      const board: Board = {
+        id: this.boards.length + 1,
+        name: input.value,
+        columns: [],
+      };
+      this.boardService.addBoard(board);
+      input.value = '';
+    } else {
+      this.isBoardBeingCreate = false;
+    }
   }
 }

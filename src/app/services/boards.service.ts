@@ -5,9 +5,24 @@ import { Board } from '../models/todo.model';
   providedIn: 'root',
 })
 export class BoardService {
-  private boards: Board[] = [];
+  private boards: Board[] = [
+    {
+      id: 1,
+      name: 'Board 1',
+      columns: [
+        {
+          title: 'ToDo',
+          todos: [
+            { id: 24, title: 'Cortar cebolla' },
+            { id: 24, title: 'Comitear cambios' },
+            { id: 24, title: 'Regar las plantas' },
+          ],
+        },
+      ],
+    },
+  ];
 
-  private selectedBoard: undefined | Board = undefined;
+  private selectedBoard: Board = { name: '', id: 0, columns: [] };
 
   getBoards(): Board[] {
     return this.boards;
@@ -22,7 +37,12 @@ export class BoardService {
   }
 
   setSelectedBoard(id: number) {
-    this.selectedBoard = this.boards.find((board) => board.id === id);
+    const result = this.boards.find((board) => board.id === id);
+    if (result != undefined) {
+      this.selectedBoard = result;
+    } else {
+      this.selectedBoard = { name: '', id: 0, columns: [] };
+    }
   }
 
   getSelectedBoard() {
