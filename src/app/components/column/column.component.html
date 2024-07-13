@@ -1,9 +1,11 @@
 <div class="min-w-72 w-72 h-fit p-2 bg-platinum rounded-xl shadow-md">
     <span class="font-semibold pl-2">{{ column.title }}</span>
-    <div class="my-4 flex flex-col gap-2">
+    <div cdkDropList class="my-2 min-h-2 flex flex-col gap-2" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.todos">
         <!-- Lista de todos -->
         @for (todo of column.todos; track todo; let i = $index;) {
-        <app-todo [todo]="todo" />
+        <div cdkDrag>
+            <app-todo [todo]="todo" [todoFather]="column.title"/>
+        </div>
         }
     </div>
     @if (isCreatingCard) {

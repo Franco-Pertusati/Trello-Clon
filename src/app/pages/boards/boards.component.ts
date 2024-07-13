@@ -34,7 +34,7 @@ export class BoardsComponent {
     if (input.value != '') {
       const board: Board = {
         id: this.boards.length + 1,
-        name: input.value,
+        title: input.value,
         columns: [],
       };
       this.boardService.addBoard(board);

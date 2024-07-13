@@ -8,7 +8,7 @@
             @for (board of boards; track $index) {
             <div class="w-64 h-36 bg-main rounded-lg p-2 cursor-pointer"
                 (click)="setSelectedBoard(board.id); navigateToBoard(board.id)">
-                <span class="text-lg text-seasalt font-semibold">{{board.name}}</span>
+                <span class="text-lg text-seasalt font-semibold">{{board.title}}</span>
             </div>
             }
             @if (!isBoardBeingCreate) {

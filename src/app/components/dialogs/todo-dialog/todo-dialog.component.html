@@ -1,71 +1,105 @@
-<div class="flex justify-center">
-    <div class="bg-seasalt p-4 rounded-xl flex w-full">
-        <div class=" w-full">
-            <h2 class="text-2xl font-bold">Task 1</h2>
-            <p class="mb-4">From ToDo List</p>
+<div class="bg-seasalt p-4 rounded-xl flex gap-6">
+    <div class="w-full">
+        <h2 class="text-2xl font-bold">{{data.todo.title }}</h2>
+        <p class="mb-6">From {{ data.todoFather }}</p>
+
+        <p class="text-xl font-bold mb-2">Description</p>
+        @if (data.todo.description) {
+        <div class="mb-6">
+            <p class="mb-2">{{data.todo.description}}</p>
+            <button class="bg-main rounded-md py-2 px-4 text-seasalt" (click)="editDescription()">Edit</button>
         </div>
-        <div class="min-w-52">
-            <div class="h-36 flex flex-row-reverse">
-                <button (click)="close()" class="relative h-10 w-10 rounded-full p-0 hover:bg-anti-flash_white">
-                    <i class="bi bi-x-lg text-xl m-0"></i>
-                </button>
+        } @else {
+        <div class="mb-6">
+            @if (isCreatingNewDescription) {
+            <textarea name="" id="" class="w-full"
+                (keydown.enter)="createDescription($event)">{{data.todo.description}}</textarea>
+            } @else {
+            <button (click)="isCreatingNewDescription = true"
+                class="h-16 text-onyx bg-platinum rounded-md p-2 w-full hover:bg-french_gray">Add more detailed
+                description...</button>
+            }
+        </div>
+        }
+
+        <p class="text-xl font-bold mb-2">Activity</p>
+        <div class="flex gap-3 mb-4">
+            <div class="h-12 w-14 rounded-full grid place-items-center bg-main font-semibold text-seasalt">
+                You</div>
+            <input type="text" class="rounded-xl w-full shadow-md" (keydown.enter)="createComent($event)">
+        </div>
+        <div class="flex flex-col gap-2">
+            @for (comment of data.todo.comments; track comment; let i = $index;) {
+            <div class="flex gap-2">
+                <div
+                    class="h-9 w-9 rounded-full grid place-items-center bg-main font-semibold text-seasalt text-sm mt-3">
+                    You</div>
+                <div class="p-4 rounded-xl rounded-bl-none bg-platinum w-fit shadow-md">{{comment}}</div>
             </div>
-            <div class="mb-6">
-                <h2 class="font-semibold text-fontent mb-2">Add to card</h2>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-people"></i>
-                    Members
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-tag"></i>
-                    Labels
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-check2-square"></i>
-                    Checklist
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-clock"></i>
-                    Dates
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-paperclip"></i>
-                    Attachment
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-card-image"></i>
-                    Cover
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-input-cursor"></i>
-                    Custom Fields
-                </button>
-            </div>
-            <div>
-                <h2 class="mb-2 font-semibold text-fontent">Actions</h2>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-arrow-right"></i>
-                    Move
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-copy"></i>
-                    Copy
-                </button>
-                <button
-                    class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
-                    <i class="bi bi-card-heading"></i>
-                    Make template
-                </button>
-            </div>
+            }
+        </div>
+    </div>
+    <div class="min-w-52">
+        <div class="h-36 flex flex-row-reverse">
+            <button (click)="close()" class="relative h-10 w-10 rounded-full p-0 hover:bg-anti-flash_white">
+                <i class="bi bi-x-lg text-xl m-0"></i>
+            </button>
+        </div>
+        <div class="mb-6">
+            <h2 class="font-semibold text-fontent mb-2">Add to card</h2>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-people"></i>
+                Members
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-tag"></i>
+                Labels
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-check2-square"></i>
+                Checklist
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-clock"></i>
+                Dates
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-paperclip"></i>
+                Attachment
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-card-image"></i>
+                Cover
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-input-cursor"></i>
+                Custom Fields
+            </button>
+        </div>
+        <div>
+            <h2 class="mb-2 font-semibold text-fontent">Actions</h2>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-arrow-right"></i>
+                Move
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-copy"></i>
+                Copy
+            </button>
+            <button
+                class="w-full bg-anti-flash_white text-fontent font-semibold py-1 px-2 flex gap-2 hover:bg-platinum mb-2 rounded text-start">
+                <i class="bi bi-card-heading"></i>
+                Make template
+            </button>
         </div>
     </div>
 </div>

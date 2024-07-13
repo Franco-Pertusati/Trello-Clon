@@ -8,21 +8,32 @@ export class BoardService {
   private boards: Board[] = [
     {
       id: 1,
-      name: 'Board 1',
+      title: 'Board 1',
       columns: [
         {
           title: 'ToDo',
+          id: 'ToDo',
           todos: [
-            { id: 24, title: 'Cortar cebolla' },
-            { id: 24, title: 'Comitear cambios' },
-            { id: 24, title: 'Regar las plantas' },
+            { id: 24, title: 'Cortar cebolla', description: '', comments: [] },
+            {
+              id: 23,
+              title: 'Comitear cambios',
+              description: '',
+              comments: [],
+            },
+            {
+              id: 22,
+              title: 'Regar las plantas',
+              description: '',
+              comments: [],
+            },
           ],
         },
       ],
     },
   ];
 
-  private selectedBoard: Board = { name: '', id: 0, columns: [] };
+  private selectedBoard: Board = { title: '', id: 0, columns: [] };
 
   getBoards(): Board[] {
     return this.boards;
@@ -41,7 +52,7 @@ export class BoardService {
     if (result != undefined) {
       this.selectedBoard = result;
     } else {
-      this.selectedBoard = { name: '', id: 0, columns: [] };
+      this.selectedBoard = { title: '', id: 0, columns: [] };
     }
   }
 

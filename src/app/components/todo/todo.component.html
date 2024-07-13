@@ -1,4 +1,10 @@
-<button
-    class="h-9 bg-seasalt shadow w-full rounded-xl hover:outline-2 text-start px-2 hover:outline hover:outline-main2">
+<button (click)="openDialog()"
+    class="p-2 bg-seasalt shadow w-full rounded-xl hover:outline-2 text-start hover:outline hover:outline-main2">
     {{todo.title}}
+    @if (todo.comments.length > 0) {
+    <div class="flex gap-2">
+        <i class="bi bi-chat-left"></i>
+        <span>{{todo.comments.length}}</span>
+    </div>
+    }
 </button>

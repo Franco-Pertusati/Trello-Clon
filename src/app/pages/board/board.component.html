@@ -1,6 +1,6 @@
 <div class="py-8 px-4 bg-main2 h-full w-full text-fontent">
-    <h2 class="font-semibold text-seasalt text-3xl mb-8">{{selectedBoard.name}}</h2>
-    <div class="flex gap-4 overflow-y-scroll h-full">
+    <h2 class="font-semibold text-seasalt text-3xl mb-8">{{selectedBoard.title}}</h2>
+    <div cdkDropListGroup class="flex gap-4 overflow-y-scroll h-full">
         @for (column of selectedBoard.columns; track column; let i = $index;) {
             <app-column [column]="column"/>
         }
@@ -12,7 +12,7 @@
         </button>
         } @else {
         <div
-            class="p-2 w-72 h-fit bg-platinum hover:bg-seasalt flex flex-col gap-2 text-start rounded-xl font-semibold shadow-md">
+            class="p-2 w-72 h-fit bg-platinum flex flex-col gap-2 text-start rounded-xl font-semibold shadow-md">
             <input type="text" placeholder="Column name" class="rounded-xl bg-seasalt" (keydown.enter)="addColumn($event)">
             <div class="flex gap-4">
                 <button class="p-2 px-4 rounded-md bg-main text-seasalt w-fit">Create</button>

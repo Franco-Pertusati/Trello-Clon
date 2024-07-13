@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Column } from '../../models/todo.model';
+import { Board, Column, ToDo } from '../../models/todo.model';
 import { TodoComponent } from '../todo/todo.component';
-import { ToDo } from '../../models/todo.model';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -15,9 +14,10 @@ import {
   standalone: true,
   imports: [TodoComponent, CdkDropList, CdkDrag],
   templateUrl: './column.component.html',
+  styleUrl: './column.component.scss'
 })
 export class ColumnComponent {
-  @Input() column: Column = { title: 'Undefined', todos: [] };
+  @Input() column: Column = { title: 'Undefined', todos: [], id: '' };
 
   isCreatingCard: boolean = false;
 
@@ -30,21 +30,27 @@ export class ColumnComponent {
       const newTodo: ToDo = {
         id: this.column.todos.length,
         title: input.value,
+        description: '',
+        comments: [],
       };
       this.column.todos.push(newTodo);
       input.value = '';
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<ToDo[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }

@@ -5,16 +5,23 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { BoardService } from '../../services/boards.service';
 import { ColumnComponent } from '../../components/column/column.component';
 import { TodoComponent } from '../../components/todo/todo.component';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+  CdkDropListGroup
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, TodoComponent, ColumnComponent],
+  imports: [CommonModule, NavbarComponent, TodoComponent, ColumnComponent, CdkDropListGroup],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss',
 })
 export class BoardComponent {
-  selectedBoard: Board = { id: 0, name: 'Undefined', columns: [] };
+  selectedBoard: Board = { id: 0, title: 'Undefined', columns: [] };
   isCreatingColumn: boolean = false;
 
   constructor(private service: BoardService) {}
@@ -30,7 +37,7 @@ export class BoardComponent {
       this.isCreatingColumn = false;
     } else {
       const newColumn: Column = {
-        id: this.selectedBoard?.columns.length,
+        id: this.selectedBoard?.columns.length.toString(),
         title: input.value,
         todos: [],
       };
