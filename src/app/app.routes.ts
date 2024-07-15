@@ -4,7 +4,7 @@ import { BoardComponent } from './pages/board/board.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const routes: Routes = [
-  { path: '', component: WelcomeComponent },
-  { path: 'boards', component: BoardsComponent },
-  { path: 'boards/:id', component: BoardComponent },
+      { path: '', component: WelcomeComponent },
+      { path: 'boards', component: BoardsComponent },
+      { path: 'boards/:id', component: BoardComponent },
 ];
