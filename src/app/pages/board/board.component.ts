@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToDo, Column, Board } from '../../models/todo.model';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { BoardService } from '../../services/boards.service';
 import { ColumnComponent } from '../../components/column/column.component';
 import { TodoComponent } from '../../components/todo/todo.component';
@@ -17,7 +16,7 @@ import {
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, TodoComponent, ColumnComponent, CdkDropListGroup],
+  imports: [CommonModule, TodoComponent, ColumnComponent, CdkDropListGroup],
   templateUrl: './board.component.html',
 })
 export class BoardComponent {
