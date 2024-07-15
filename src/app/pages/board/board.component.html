@@ -1,5 +1,5 @@
 <div class="py-8 px-4 bg-main2 h-full w-full text-fontent">
-    <h2 class="font-semibold text-seasalt text-3xl mb-8">{{selectedBoard.title}}</h2>
+    <h2 class="font-semibold text-seasalt text-3xl mb-9">{{selectedBoard.title}}</h2>
     <div cdkDropListGroup class="flex gap-4 overflow-y-scroll h-full">
         @for (column of selectedBoard.columns; track column; let i = $index;) {
             <app-column [column]="column"/>
