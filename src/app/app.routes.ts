@@ -9,11 +9,11 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-     children: [
-       { path: '', component: WelcomeComponent },
-       { path: 'boards', component: BoardsComponent },
-       { path: 'boards/:id', component: BoardComponent },
-       {
+    children: [
+      { path: '', component: WelcomeComponent },
+      { path: 'boards', component: BoardsComponent },
+      { path: 'boards/:id', component: BoardComponent },
+      {
         path: '**',
         component: NotFoundComponent,
       },
