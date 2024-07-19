@@ -4,9 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-square-btn',
   standalone: true,
   imports: [],
-  templateUrl: './square-btn.component.html',
-  styleUrl: './square-btn.component.css'
+  templateUrl: './square-btn.component.html'
 })
 export class SquareBtnComponent {
-  
+
 }
