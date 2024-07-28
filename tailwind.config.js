@@ -38,11 +38,20 @@ module.exports = {
         DEFAULT: "#212529",
       },
       mainColor: {
-        DEFAULT: "#B5D568",
+        DEFAULT: "#bce784",
       },
       borderColor: {
-        DEFAULT: "#b4d5682f",
+        DEFAULT: "#bce78471",
       },
+      disabled: {
+        DEFAULT: "#E63946"
+      },
+      enabled: {
+        DEFAULT: "#67E639"
+      },
+      warning: {
+        DEFAULT: "#E6E039"
+      }
     },
   },
   plugins: [],
