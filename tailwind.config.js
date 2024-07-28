@@ -40,6 +40,9 @@ module.exports = {
       mainColor: {
         DEFAULT: "#B5D568",
       },
+      borderColor: {
+        DEFAULT: "#b4d5682f",
+      },
     },
   },
   plugins: [],

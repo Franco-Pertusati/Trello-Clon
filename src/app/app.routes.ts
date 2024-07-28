@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './pages/layout/layout.component';
-import { MapsComponent } from './pages/maps/maps.component';
-import { SalesComponent } from './pages/sales/sales.component';
-import { AtmComponent } from './pages/atm/atm.component';
-import { StockComponent } from './pages/stock/stock.component';
-import { ProductsComponent } from './pages/products/products.component';
-import { ShiftsComponent } from './pages/shifts/shifts.component';
-import { StatsComponent } from './pages/stats/stats.component';
+import { LayoutComponent } from './domains/layout/layout.component';
+import { MapsComponent } from './domains/maps/maps.component';
+import { SalesComponent } from './domains/sales/sales.component';
+import { AtmComponent } from './domains/atm/atm.component';
+import { StockComponent } from './domains/stock/stock.component';
+import { ProductsComponent } from './domains/products/products.component';
+import { ShiftsComponent } from './domains/shifts/shifts.component';
+import { StatsComponent } from './domains/stats/stats.component';
 
 export const routes: Routes = [
   {
